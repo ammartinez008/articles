@@ -1,5 +1,6 @@
 package Publication;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -11,17 +12,19 @@ public class Article implements Publication {
 	private Date publishedDate;
 	private String publisher;
 	private String body;
+	private String title;
 
 	private Article(ArticleBuilder builder) {
 		this.authors = builder.authors;
 		this.publishedDate = builder.publishedDate;
 		this.publisher = builder.publisher;
 		this.body = builder.body;
+		this.title = builder.title;
 	}
 
 
 	public String getBody() {
-		return null;
+		return body;
 	}
 
 	public long getWordCount() {
@@ -48,12 +51,15 @@ public class Article implements Publication {
 		return publisher;
 	}
 
+	public String getTitle() { return title;}
+
 
 	public static class ArticleBuilder {
 		private ArrayList<String> authors;
 		private final Date publishedDate;
 		private final String body;
 		private String publisher;
+		private String title;
 
 		public ArticleBuilder(Date publishedDate, String body) {
 			this.publishedDate = publishedDate;
@@ -67,6 +73,11 @@ public class Article implements Publication {
 
 		public ArticleBuilder authors(ArrayList<String> authors) {
 			this.authors = authors;
+			return this;
+		}
+
+		public ArticleBuilder title(String title) {
+			this.title = title;
 			return this;
 		}
 

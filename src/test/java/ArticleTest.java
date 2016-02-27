@@ -39,6 +39,20 @@ public class ArticleTest {
 		assertEquals("checking date", article.getPublishedDate(), paramDate);
 	}
 
+	@Test
+	public void testFromDB() {
+		Document doc = new Document();
+		Db db = new Db();
+		doc = db.getLastArticle();
+		article = new Article.ArticleBuilder(doc.getDate("add_date"), doc.getString("text"))
+			.publisher(doc.getString("publisher"))
+			.title(doc.getString("title"))
+			.build();
 
+		assertNotNull(article);
+		assertEquals(article.getPublisher(), "theguardian");
+		assertNotNull(article.getBody());
+		assertEquals(article.getTitle(), "North Korea rocket launch: UN security council condemns latest violation");
+	}
 
 }

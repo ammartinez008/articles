@@ -12,6 +12,9 @@ import org.w3c.dom.views.DocumentView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  * Created by alx on 2/14/16.
@@ -19,11 +22,14 @@ import java.util.List;
 public class Db {
 	private MongoClient client;
 	private MongoDatabase db;
+	private Logger logger;
 
 	// constructor
 	public Db() {
 		this.client = new MongoClient();
 		this.db = client.getDatabase("publishings");
+		logger = Logger.getLogger("com.mongodb.diagnostics.logging.JULLogger");
+		logger.setLevel(Level.WARNING);
 	}
 
 	//get last recent article inserted into DB
